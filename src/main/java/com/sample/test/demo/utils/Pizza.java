@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_EMPTY)
 public class Pizza {
 
-    private String item = "";
+    private String item  = "";
     private String pizza = "";
     private List<String> toppings;
 
