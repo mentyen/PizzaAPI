@@ -21,18 +21,18 @@ public class BaseTest {
 		return pizza;
 	}
 
-	public static Order getOrder(String orderId,String item,String pizzaSize,List<String>toppings) {
+	public static Order getOrder(String item,String pizzaSize,List<String>toppings) {
 
 		order = new Order();
-		order.setId(orderId);
+		//order.setId(orderId);
 		order.setItems(Arrays.asList(getPizza(item, pizzaSize,toppings)));
 
 		return order;
 	}
 
-	public static String getJson(String orderId,String item,String pizzaSize,List<String>toppings) {
+	public static String getJson(String item,String pizzaSize,List<String>toppings) {
 
-		json = new Gson().toJson(getOrder(orderId,item,pizzaSize,toppings));
+		json = new Gson().toJson(getOrder(item,pizzaSize,toppings));
 
 		return json;
 	}

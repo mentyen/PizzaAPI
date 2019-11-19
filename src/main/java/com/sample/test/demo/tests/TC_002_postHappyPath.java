@@ -27,7 +27,7 @@ public class TC_002_postHappyPath extends BaseTest{
 	
 		RestAssured.baseURI = "https://my-json-server.typicode.com/sa2225/demo/orders";
 		
-		String body=getJson(null, "1", "Small 6 Slices - 1 topping", Arrays.asList("Diced Mango"));
+		String body=getJson("1", "Small 6 Slices - 1 topping", Arrays.asList("Diced Mango"));
 
 		response = given().accept(ContentType.JSON).header("Content-type", "application/json").body(body).when()
 				.request(Method.POST);
@@ -36,30 +36,30 @@ public class TC_002_postHappyPath extends BaseTest{
 
 	@Test
 
-	public void getStatus() {
+	public void validateStatusCode() {
 		Assert.assertEquals(response.getStatusCode(), 201);
 	}
 
 	@Test
-	public void getStatusLine() {
+	public void validateStatusLine() {
 
 		Assert.assertEquals("HTTP/1.1 201 Created", response.getStatusLine());
 	}
 
 	@Test
-	public void getTime() {
+	public void validateResponseTime() {
 
 		Assert.assertTrue(response.getTime() < 2000L);
 	}
 
 	@Test
-	public void getHeader() {
+	public void validateHeader() {
 
 		Assert.assertEquals("application/json; charset=utf-8", response.getHeader("Content-Type"));
 	}
 
 	@Test
-	public void getBody() {
+	public void validateResponseBody() {
 
 		Assert.assertTrue(response.getBody() != null);
 			

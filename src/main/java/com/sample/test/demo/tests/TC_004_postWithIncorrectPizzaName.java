@@ -5,6 +5,7 @@ import static io.restassured.RestAssured.given;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import junit.framework.Assert;
 
-public class TC_004_postWithPizzaNotSpecify extends BaseTest{
+public class TC_004_postWithIncorrectPizzaName extends BaseTest{
 	
 	public Response response;
 
@@ -27,39 +28,39 @@ public class TC_004_postWithPizzaNotSpecify extends BaseTest{
 	
 		RestAssured.baseURI = "https://my-json-server.typicode.com/sa2225/demo/orders";
 		
-		String body=getJson(null, "1", "Pizza", Arrays.asList("Classic Pepperoni","Provolone cheese"));
-
-		response = given().accept(ContentType.JSON).header("Content-type", "application/json").body(body).when()
+		String obj=getJson("1", "Small", Arrays.asList("Classic Pepperoni"));
+	
+		response = given().accept(ContentType.JSON).header("Content-type", "application/json").body(obj).when()
 				.request(Method.POST);
 		
 	}
 
 	@Test
 
-	public void getStatus() {
+	public void validateStatusCod() {
 		Assert.assertEquals(response.getStatusCode(), 201);
 	}
 
 	@Test
-	public void getStatusLine() {
+	public void validateStatusLine() {
 
 		Assert.assertEquals("HTTP/1.1 201 Created", response.getStatusLine());
 	}
 
 	@Test
-	public void getTime() {
+	public void validateResponseTime() {
 
 		Assert.assertTrue(response.getTime() < 2000L);
 	}
 
 	@Test
-	public void getHeader() {
+	public void validateHeaders() {
 
 		Assert.assertEquals("application/json; charset=utf-8", response.getHeader("Content-Type"));
 	}
 
 	@Test
-	public void getBody() {
+	public void validateResponseBody() {
 
 		Assert.assertTrue(response.getBody() != null);
 			
